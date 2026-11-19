@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity">
+<body>
+<nav th:fragment="menu">
+    <!-- Mindenki látja -->
+    <a th:href="@{/}">Home</a>
+    <!-- Csak bejelentkezett USER vagy ADMIN -->
+    <span sec:authorize="isAuthenticated()"> | <a th:href="@{/user}">User</a></span>
+    <!-- Csak ADMIN -->
+    <span sec:authorize="hasRole('ADMIN')"> | <a th:href="@{/admin}">Admin</a></span>
+    <!-- Látogató -->
+    <span sec:authorize="isAnonymous()"> | <a th:href="@{/register}">Register</a>|<a
+            th:href="@{/login}">Login</a></span>
+    <!-- Bejelentkezett felhasználó -->
+    <span sec:authorize="isAuthenticated()"> |
+<form th:action="@{/logout}" method="post" style="display: inline">
+<button type="submit">Logout</button>
+</form>
+</span>
+</nav>
+</body>
+</html>
