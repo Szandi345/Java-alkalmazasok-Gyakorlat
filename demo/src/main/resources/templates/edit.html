@@ -23,32 +23,31 @@
                         <h2>Sütemény szerkesztése</h2>
                     </header>
                     <p>
-                        Itt módosíthatod a kiválasztott
-                        sütemény adatait.
+                        Módosítsd a kiválasztott sütemény adatait,
+                        majd kattints a mentés gombra.
                     </p>
-                    <p th:if="${hiba}"
-                       th:text="${hiba}"
-                       style="color: #f56a6a;">
-                    </p>
+
+                    <!-- Hibaüzenet -->
+                    <div th:if="${hiba}"
+                         th:text="${hiba}"
+                         style="
+                            background-color: #ffebee;
+                            color: #c62828;
+                            border: 1px solid #ef9a9a;
+                            border-radius: 6px;
+                            padding: 15px;
+                            margin-bottom: 20px;
+                         ">
+                    </div>
                     <form th:action="@{/edit}"
                           th:object="${suti}"
                           method="post">
+
+                        <!-- Az ID rejtve marad -->
+                        <input type="hidden" th:field="*{id}">
                         <div class="row gtr-uniform">
 
-                            <!-- Azonosító -->
-                            <div class="col-12">
-                                <label for="id">
-                                    Sütemény azonosítója
-                                </label>
-                                <input type="number"
-                                       id="id"
-                                       th:value="*{id}"
-                                       readonly>
-                                <input type="hidden"
-                                       th:field="*{id}">
-                            </div>
-
-                            <!-- Név -->
+                            <!-- Sütemény neve -->
                             <div class="col-12">
                                 <label for="nev">
                                     Sütemény neve
@@ -56,30 +55,39 @@
                                 <input type="text"
                                        id="nev"
                                        th:field="*{név}"
-                                       maxlength="255"
+                                       maxlength="150"
                                        required>
                             </div>
 
-                            <!-- Típus -->
+                            <!-- Sütemény típusa -->
                             <div class="col-12">
                                 <label for="tipus">
                                     Sütemény típusa
                                 </label>
-                                <input type="text"
-                                       id="tipus"
-                                       th:field="*{tipus}"
-                                       maxlength="255"
-                                       required>
+                                <select id="tipus"
+                                        th:field="*{tipus}"
+                                        required>
+                                    <option value="">
+                                        Válassz típust!
+                                    </option>
+                                    <option th:each="tipus : ${tipusok}"
+                                            th:value="${tipus}"
+                                            th:text="${tipus}">
+                                    </option>
+                                </select>
                             </div>
 
                             <!-- Díjazott -->
                             <div class="col-12">
-                                <input type="checkbox"
-                                       id="dijazott"
-                                       th:field="*{dijazott}">
                                 <label for="dijazott">
-                                    Díjazott sütemény
+                                    Díjazott sütemény?
                                 </label>
+                                <select id="dijazott"
+                                        th:field="*{dijazott}"
+                                        required>
+                                    <option value="false">Nem</option>
+                                    <option value="true">Igen</option>
+                                </select>
                             </div>
 
                             <!-- Gombok -->
