@@ -95,7 +95,10 @@ public class WebSecurityConfig {
                                 "/images/**",
                                 "/sutik",
                                 "/sutik/**",
-                                "/webfonts/**"
+                                "/webfonts/**",
+                                "/style.css",
+                                "/myScript.js",
+                                "/restful.html"
                         ).permitAll()
 
                         // Csak bejelentkezett felhasználók
