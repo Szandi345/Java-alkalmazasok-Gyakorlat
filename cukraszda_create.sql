@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS ar (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     sutiid INT UNSIGNED NOT NULL,
     ertek DECIMAL(10,2) NOT NULL,
-    egyseg VARCHAR(50) NOT NULL,
+    egyseg VARCHAR(50) NULL,
     PRIMARY KEY (id),
     CONSTRAINT fk_ar_suti
         FOREIGN KEY (sutiid) REFERENCES suti(id)
