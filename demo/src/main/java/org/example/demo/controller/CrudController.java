@@ -68,6 +68,8 @@ public class CrudController {
                         )
                 );
         model.addAttribute("suti", suti);
+        // A választható süteménytípusok átadása
+        model.addAttribute("tipusok", tipusokLekerese());
         return "edit";
     }
 
