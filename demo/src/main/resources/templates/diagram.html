@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Diagram - Édes Álmok Cukrászda</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="is-preload">
+    <div id="wrapper">
+        <!-- Fő tartalom -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Fejléc -->
+                <header id="header">
+                    <a th:href="@{/}" class="logo">
+                        <strong>Édes Álmok</strong> Cukrászda
+                    </a>
+                </header>
+
+                <!-- Diagram -->
+                <section>
+                    <header class="major">
+                        <h2>Sütemények statisztikája</h2>
+                    </header>
+                    <p>
+                        Az alábbi oszlopdiagram a cukrászda adatbázisában szereplő sütemények számát mutatja típusonként.
+                    </p>
+                    <div class="box">
+                        <h3>Sütemények száma típusonként</h3>
+                        <div style="position: relative; height: 420px;">
+                            <canvas id="sutiDiagram"></canvas>
+                        </div>
+                    </div>
+                    <p>
+                        A diagram adatai közvetlenül a
+                        MySQL-adatbázisból származnak.
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <!-- Oldalsó menü -->
+        <div id="sidebar">
+            <div class="inner">
+                <div th:replace="~{menu :: menu}"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thymeleaf adatok átadása JavaScriptnek -->
+    <script th:inline="javascript">
+        const tipusok = /*[[${tipusok}]]*/ [];
+        const darabszamok = /*[[${darabszamok}]]*/ [];
+        const ctx = document.getElementById('sutiDiagram');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: tipusok,
+                datasets: [{
+                    label: 'Sütemények száma',
+                    data: darabszamok,
+                    backgroundColor: 'rgba(245, 106, 106, 0.7)',
+                    borderColor: 'rgba(245, 106, 106, 1)',
+                    borderWidth: 1,
+                    borderRadius: 5
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true
+                    },
+                    title: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+<script th:src="@{/js/navbar.js}"></script>
+</body>
+</html>

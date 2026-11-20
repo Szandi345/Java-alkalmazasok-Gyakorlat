@@ -1,4 +1,7 @@
 package org.example.demo;
+import org.example.demo.repository.ArRepo;
+import org.example.demo.repository.SutiRepo;
+import org.example.demo.repository.TartalomRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
