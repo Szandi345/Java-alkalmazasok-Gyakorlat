@@ -2,41 +2,108 @@
 <html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>CRUD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CRUD - Édes Álmok Cukrászda</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
-<body>
-<<<<<<< Updated upstream
+<body class="is-preload">
+    <div id="wrapper">
 
+        <!-- Fő tartalom -->
+        <div id="main">
+            <div class="inner">
+
+                <!-- Fejléc -->
+                <header id="header">
+                    <a th:href="@{/}" class="logo">
+                        <strong>Édes Álmok</strong> Cukrászda
+                    </a>
+                </header>
+                
+                <!-- Sikeres sütemény létrehozása -->
+                <div th:if="${param.siker != null
+             and param.siker[0] == 'letrehozva'}"
+                     style="
+                        background-color: #e8f5e9;
+                        color: #2e7d32;
+                        border: 1px solid #81c784;
+                        border-radius: 6px;
+                        padding: 15px;
+                        margin-bottom: 20px;
+                        font-weight: bold;
+                     ">
+                    &#10004; A sütemény sikeresen létrejött!
+                </div>
+                <section>
+                    <header class="major">
+                        <h2>Sütemények kezelése (CRUD)</h2>
+                    </header>
+                    <p>
+                        Ezen az oldalon az adminisztrátor
+                        kezelheti a cukrászda süteményeit.
+                    </p>
+
+                    <!-- Új sütemény -->
+                    <ul class="actions">
+                        <li>
+                            <a th:href="@{/uj}"
+                               class="button primary">
+                                Új sütemény hozzáadása
+                            </a>
+                        </li>
+                    </ul>
+
+                    <!-- Sütemények táblázata -->
+                    <div class="table-wrapper">
+                        <p th:if="${param.torlesHiba}"
+                           style="color: #f56a6a;">
+                            A sütemény nem törölhető, mert kapcsolódó ár- vagy tartalmi adatok tartoznak hozzá.
+                        </p>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Név</th>
+                                <th>Típus</th>
+                                <th>Díjazott</th>
+                                <th>Műveletek</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="suti : ${sütik}">
+                                <td th:text="${suti.id}"></td>
+                                <td th:text="${suti.név}"></td>
+                                <td th:text="${suti.tipus}"></td>
+                                <td th:text="${suti.dijazott == true ? 'Igen' : 'Nem'}"></td>
+                                <td>
+                                    <a th:href="@{/edit/{id}(id=${suti.id})}"
+                                       class="button small">
+                                        Szerkesztés
+                                    </a>
+                                    <form th:action="@{/delete/{id}(id=${suti.id})}"
+                                          method="post"
+                                          style="display: inline;"
+                                          onsubmit="return confirm('Biztosan törölni szeretnéd ezt a süteményt?');">
+                                        <button type="submit" class="button small">
+                                            Törlés
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Oldalsó menü -->
+        <div id="sidebar">
+            <div class="inner">
+                <div th:replace="~{menu :: menu}"></div>
+            </div>
+        </div>
+    </div>
 <script th:src="@{/js/navbar.js}"></script>
-=======
-<div>
-    <h1>Sütik</h1>
-    <a th:href="@{'/uj'}">Új sütit hozzáad</a>
-    <br/><br/>
-    <table>
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Név</th>
-            <th>Típus</th>
-            <th>Díjazott</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="süti : ${sütik}">
-            <td th:text="${süti.id}"></td>
-            <td th:text="${süti.név}"></td>
-            <td th:text="${süti.tipus}"></td>
-            <td th:text="${süti.dijazott}"></td>
-            <td>
-                <a th:href="@{'/edit/'+${süti.id}}">Edit</a>&nbsp;&nbsp;&nbsp;
-                <a th:href="@{'/delete/'+${süti.id}}">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
->>>>>>> Stashed changes
 </body>
 </html>

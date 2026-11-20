@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>Új sütemény - Édes Álmok Cukrászda</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body class="is-preload">
+    <div id="wrapper">
+
+        <!-- Fő tartalom -->
+        <div id="main">
+            <div class="inner">
+                <header id="header">
+                    <a th:href="@{/}" class="logo">
+                        <strong>Édes Álmok</strong> Cukrászda
+                    </a>
+                </header>
+                <section>
+                    <header class="major">
+                        <h2>Új sütemény hozzáadása</h2>
+                    </header>
+                    <p>
+                        Az alábbi űrlapon új süteményt rögzíthetsz az adatbázisban.
+                    </p>
+                    <p th:if="${hiba}"
+                       th:text="${hiba}"
+                       style="color: #f56a6a;">
+                    </p>
+                    <form th:action="@{/uj}"
+                          th:object="${suti}"
+                          method="post">
+                        <div class="row gtr-uniform">
+
+                            <!-- Sütemény neve -->
+                            <div class="col-12">
+                                <label for="nev">Sütemény neve</label>
+                                <input type="text"
+                                       id="nev"
+                                       th:field="*{név}"
+                                       maxlength="255"
+                                       required
+                                       placeholder="Add meg a sütemény nevét">
+                            </div>
+
+                            <!-- Sütemény típusa -->
+                            <div class="col-12">
+                                <label for="tipus">Sütemény típusa</label>
+                                <select id="tipus"
+                                        th:field="*{tipus}"
+                                        required>
+                                    <option value="">Válassz típust!</option>
+                                    <option th:each="tipus : ${tipusok}"
+                                            th:value="${tipus}"
+                                            th:text="${tipus}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Díjazott sütemény -->
+                            <div class="col-12">
+                                <label for="dijazott">Díjazott sütemény?</label>
+                                <select id="dijazott"
+                                        th:field="*{dijazott}"
+                                        required>
+                                    <option value="false">Nem</option>
+                                    <option value="true">Igen</option>
+                                </select>
+                            </div>
+
+                            <!-- Gombok -->
+                            <div class="col-12">
+                                <ul class="actions">
+                                    <li>
+                                        <button type="submit" class="primary">
+                                            Sütemény mentése
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/crud}" class="button">
+                                            Vissza
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+
+        <!-- Oldalsó menü -->
+        <div id="sidebar">
+            <div class="inner">
+                <div th:replace="~{menu :: menu}"></div>
+            </div>
+        </div>
+    </div>
+<script th:src="@{/js/navbar.js}"></script>
+</body>
+</html>
