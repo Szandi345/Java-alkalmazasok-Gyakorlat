@@ -74,6 +74,9 @@ public class WebSecurityConfig {
             throws Exception {
         http
                 .authenticationProvider(authenticationProvider())
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/sutik", "/sutik/**")
+                )
 // URL-ek védelme: megmondja, hogy ki melyik oldalt nézheti meg.
 
                 .authorizeHttpRequests(auth -> auth
@@ -90,6 +93,8 @@ public class WebSecurityConfig {
                                 "/css/**",
                                 "/js/**",
                                 "/images/**",
+                                "/sutik",
+                                "/sutik/**",
                                 "/webfonts/**"
                         ).permitAll()
 
