@@ -1,12 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>CRUD</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
+<<<<<<< Updated upstream
 
 <script th:src="@{/js/navbar.js}"></script>
+=======
+<div>
+    <h1>Sütik</h1>
+    <a th:href="@{'/uj'}">Új sütit hozzáad</a>
+    <br/><br/>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Név</th>
+            <th>Típus</th>
+            <th>Díjazott</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="süti : ${sütik}">
+            <td th:text="${süti.id}"></td>
+            <td th:text="${süti.név}"></td>
+            <td th:text="${süti.tipus}"></td>
+            <td th:text="${süti.dijazott}"></td>
+            <td>
+                <a th:href="@{'/edit/'+${süti.id}}">Edit</a>&nbsp;&nbsp;&nbsp;
+                <a th:href="@{'/delete/'+${süti.id}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+>>>>>>> Stashed changes
 </body>
 </html>
