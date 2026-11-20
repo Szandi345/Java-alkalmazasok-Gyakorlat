@@ -1,22 +1,85 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bejelentkezés - Édes Álmok Cukrászda</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
-<body>
-<div th:replace="~{menu :: menu}"></div>
-<hr>
-<h1>Login</h1>
-// Controller2-ben ez van: return "redirect:/login?registered";
-<div th:if="${param.registered}" style="color: green;">Successful registration! You can log in.</div>
-// hibás login esetén ez az URL: http://localhost:8080/login?error
-<div th:if="${param.error}" style="color: red;">Incorrect username or password!</div>
-<form th:action="@{/login}" method="post">
-    <label>Username:</label><input type="text" name="username"><br>
-    <label>Password:</label><input type="password" name="password"><br>
-    <button type="submit">Login</button>
-</form>
+
+<body class="is-preload">
+    <div id="wrapper">
+        <div id="main">
+            <div class="inner">
+                <header id="header">
+                    <a th:href="@{/}" class="logo">
+                        <strong>Édes Álmok</strong> Cukrászda
+                    </a>
+                </header>
+                <section>
+                    <header class="major">
+                        <h2>Bejelentkezés</h2>
+                    </header>
+                    <p>
+                        Jelentkezz be a fiókodba, hogy elérhesd
+                        a regisztrált felhasználóknak szóló funkciókat!
+                    </p>
+                    <div th:if="${param.registered != null}"
+                         style="padding: 15px; margin-bottom: 20px;
+                                background: #f1f8f1; color: #256029;
+                                border-left: 4px solid #4CAF50;">
+                        Sikeres regisztráció! Most már bejelentkezhetsz.
+                    </div>
+                    <div th:if="${param.error != null}"
+                         style="padding: 15px; margin-bottom: 20px;
+                                background: #fff1f0; color: #b42318;
+                                border-left: 4px solid #d92d20;">
+                        Hibás felhasználónév vagy jelszó!
+                    </div>
+                    <div class="row">
+                        <div class="col-8 col-12-medium">
+                            <form th:action="@{/login}" method="post">
+                                <label for="username">
+                                    Felhasználónév
+                                </label>
+                                <input type="text"
+                                       id="username"
+                                       name="username"
+                                       placeholder="Felhasználónév"
+                                       autocomplete="username"
+                                       required>
+                                <br>
+                                <label for="password">
+                                    Jelszó
+                                </label>
+                                <input type="password"
+                                       id="password"
+                                       name="password"
+                                       placeholder="Jelszó"
+                                       autocomplete="current-password"
+                                       required>
+                                <br>
+                                <button type="submit" class="primary">
+                                    Bejelentkezés
+                                </button>
+                            </form>
+                            <p>
+                                Még nincs fiókod?
+                                <a th:href="@{/register}">
+                                    Regisztrálj itt!
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="sidebar">
+            <div class="inner">
+                <div th:replace="~{menu :: menu}"></div>
+            </div>
+        </div>
+    </div>
+<script th:src="@{/js/navbar.js}"></script>
 </body>
 </html>

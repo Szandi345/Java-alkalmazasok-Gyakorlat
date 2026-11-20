@@ -4,38 +4,65 @@
       xmlns:sec="http://www.thymeleaf.org/extras/springsecurity">
 
 <body>
-<nav id="menu" th:fragment="menu">
-    <header class="major">
-        <h2>Menü</h2>
-    </header>
-    <ul>
-        <li><a th:href="@{/}">Főoldal</a></li>
-        <li><a th:href="@{/adatbazis}">Adatbázis</a> </li>
-        <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
-        <li><a th:href="@{/diagram}">Diagram</a> </li>
-        <li><a th:href="@{/rest}">REST API</a></li>
+    <div th:fragment="menu">
 
-        <!-- Bejelentkezett felhasználók -->
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">Felhasználói oldal</a></li>
-        <li sec:authorize="isAuthenticated()"><a th:href="@{/uzenetek}">Üzenetek</a></li>
+        <!-- BEJELENTKEZÉS / REGISZTRÁCIÓ -->
+        <!-- Csak kijelentkezett látogatóknak -->
+        <div sec:authorize="isAnonymous()"
+             style="margin-bottom: 2em;">
+            <a th:href="@{/login}"
+               class="button primary fit"
+               style="margin-bottom: 10px;">
+                Bejelentkezés
+            </a>
+            <a th:href="@{/register}"
+               class="button fit">
+                Regisztráció
+            </a>
+        </div>
 
-        <!-- Adminisztrátor -->
-        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}">Adminisztráció</a></li>
-        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/crud}">CRUD</a></li>
-
-        <!-- Vendég -->
-        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Bejelentkezés</a></li>
-        <li sec:authorize="isAnonymous()"><a th:href="@{/register}">Regisztráció</a></li>
-
-        <!-- Kijelentkezés -->
-        <li sec:authorize="isAuthenticated()">
+        <!-- KIJELENTKEZÉS -->
+        <!-- Csak bejelentkezett felhasználóknak -->
+        <div sec:authorize="isAuthenticated()"
+             style="margin-bottom: 2em;">
+            <p style="margin-bottom: 10px;">
+                Bejelentkezve:
+                <strong sec:authentication="name"></strong>
+            </p>
             <form th:action="@{/logout}" method="post">
-                <button type="submit" class="button primary">
+                <button type="submit"
+                        class="button primary fit">
                     Kijelentkezés
                 </button>
             </form>
-        </li>
-    </ul>
-</nav>
+        </div>
+
+        <!-- OLDALSÓ MENÜ -->
+        <nav id="menu">
+        <header class="major">
+            <h2>Menü</h2>
+        </header>
+        <ul>
+            <li><a th:href="@{/}">Főoldal</a></li>
+            <li><a th:href="@{/adatbazis}">Adatbázis</a> </li>
+            <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
+            <li><a th:href="@{/diagram}">Diagram</a> </li>
+            <li><a th:href="@{/rest}">REST API</a></li>
+
+            <!-- Bejelentkezett felhasználók -->
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">Felhasználói oldal</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/uzenetek}">Üzenetek</a></li>
+
+            <!-- Adminisztrátor -->
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}">Adminisztráció</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/crud}">CRUD</a></li>
+
+            <!-- Vendég -->
+            <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Bejelentkezés</a></li>
+            <li sec:authorize="isAnonymous()"><a th:href="@{/register}">Regisztráció</a></li>
+
+        </ul>
+        </nav>
+    </div>
 </body>
 </html>

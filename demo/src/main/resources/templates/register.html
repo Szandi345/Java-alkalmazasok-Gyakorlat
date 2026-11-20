@@ -1,19 +1,78 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Regisztráció - Édes Álmok Cukrászda</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
-<body>
-<div th:replace="~{menu :: menu}"></div>
-<hr>
-<h1>Registration</h1>
-<p th:if="${error}" th:text="${error}" style="color: red"></p>
-<form th:action="@{/register}" method="post">
-    <label>Username:</label><input type="text" name="username" required><br>
-    <label>Password:</label><input type="password" name="password" required><br>
-    <button type="submit">Register</button>
-</form>
+<body class="is-preload">
+    <div id="wrapper">
+        <div id="main">
+            <div class="inner">
+                <header id="header">
+                    <a th:href="@{/}" class="logo">
+                        <strong>Édes Álmok</strong> Cukrászda
+                    </a>
+                </header>
+                <section>
+                    <header class="major">
+                        <h2>Regisztráció</h2>
+                    </header>
+                    <p>
+                        Hozd létre saját felhasználói fiókodat,
+                        és fedezd fel cukrászdánk további funkcióit!
+                    </p>
+                    <div th:if="${error != null}"
+                         style="padding: 15px; margin-bottom: 20px;
+                                background: #fff1f0; color: #b42318;
+                                border-left: 4px solid #d92d20;">
+                        <span th:text="${error}"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-8 col-12-medium">
+                            <form th:action="@{/register}" method="post">
+                                <label for="username">
+                                    Felhasználónév
+                                </label>
+                                <input type="text"
+                                       id="username"
+                                       name="username"
+                                       placeholder="Válassz felhasználónevet"
+                                       autocomplete="username"
+                                       required>
+                                <br>
+                                <label for="password">
+                                    Jelszó
+                                </label>
+                                <input type="password"
+                                       id="password"
+                                       name="password"
+                                       placeholder="Adj meg egy jelszót"
+                                       autocomplete="new-password"
+                                       required>
+                                <br>
+                                <button type="submit" class="primary">
+                                    Regisztráció
+                                </button>
+                            </form>
+                            <p>
+                                Már rendelkezel fiókkal?
+                                <a th:href="@{/login}">
+                                    Jelentkezz be!
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="sidebar">
+            <div class="inner">
+                <div th:replace="~{menu :: menu}"></div>
+            </div>
+        </div>
+    </div>
+<script th:src="@{/js/navbar.js}"></script>
 </body>
 </html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hu"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>Üzenetek - Édes Álmok Cukrászda</title>
+    <link rel="stylesheet"
+          th:href="@{/css/main.css}">
+</head>
+<body class="is-preload">
+    <div id="wrapper">
+        <div id="main">
+            <div class="inner">
+                <header id="header">
+                    <a th:href="@{/}" class="logo">
+                        <strong>Édes Álmok</strong> Cukrászda
+                    </a>
+                </header>
+                <section>
+                    <header class="major">
+                        <h2>Beérkezett üzenetek</h2>
+                    </header>
+                    <p>
+                        A látogatók által küldött üzenetek, a legfrissebbtől a legrégebbiig.
+                    </p>
+                    <p th:if="${#lists.isEmpty(uzenetek)}">
+                        Még nem érkezett üzenet.
+                    </p>
+                    <div class="table-wrapper"
+                         th:unless="${#lists.isEmpty(uzenetek)}">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Azonosító</th>
+                                <th>Név</th>
+                                <th>E-mail</th>
+                                <th>Üzenet</th>
+                                <th>Küldés ideje</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="uzenet : ${uzenetek}">
+                                <td th:text="${uzenet.id}"></td>
+                                <td th:text="${uzenet.nev}"></td>
+                                <td th:text="${uzenet.email}"></td>
+                                <td th:text="${uzenet.szoveg}"
+                                    style="overflow-wrap: anywhere;"></td>
+                                <td th:text="${#temporals.format(
+                                    uzenet.datum,
+                                    'yyyy.MM.dd HH:mm:ss'
+                                )}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="sidebar">
+            <div class="inner">
+                <div th:replace="~{menu :: menu}"></div>
+            </div>
+        </div>
+    </div>
+<script th:src="@{/js/navbar.js}"></script>
+</body>
+</html>
