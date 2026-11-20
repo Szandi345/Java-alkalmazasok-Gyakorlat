@@ -103,10 +103,18 @@ public class WebSecurityConfig {
                         .hasAnyRole("USER", "ADMIN")
 
                         // Csak adminisztrátorok
-                        .requestMatchers("/admin", "/crud", "/crud/**")
-                        .hasRole("ADMIN")
+                                .requestMatchers(
+                                        "/admin",
+                                        "/crud",
+                                        "/crud/**",
+                                        "/uj",
+                                        "/edit",
+                                        "/edit/**",
+                                        "/delete/**"
+                                )
+                                .hasRole("ADMIN")
 
-                        // Minden más útvonalhoz bejelentkezés szükséges
+                                // Minden más útvonalhoz bejelentkezés szükséges
                         .anyRequest().authenticated()
                 )
 // A form-alapú (űrlapos) bejelentkezést konfigurálja és szabja testre a Spring Security-ben.

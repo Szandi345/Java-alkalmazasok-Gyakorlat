@@ -7,6 +7,7 @@ import java.util.ArrayList;
 @Table(name = "suti")
 public class Suti {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "nev")
     private String név;
