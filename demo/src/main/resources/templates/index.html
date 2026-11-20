@@ -1,13 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns:th="https://www.thymeleaf.org">
+<html lang="hu"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cukrászda - Adatbázis</title>
     <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
-<p th:utext="${str}"></p>
+    <div id="wrapper">
+        <div id="main">
+            <div class="inner">
+                <header id="header">
+                    <a th:href="@{/}" class="logo">
+                        <strong>Édes Álmok</strong> Cukrászda
+                    </a>
+                </header>
+                <section>
+                    <header class="main">
+                        <h1>Adatbázis</h1>
+                    </header>
+                    <p>
+                        Az alábbi táblázatok a cukrászda adatbázisában található adatokat jelenítik meg.
+                    </p>
+
+                    <!-- SÜTEMÉNYEK -->
+                    <header class="major">
+                        <h2>Sütemények</h2>
+                    </header>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Név</th>
+                                <th>Típus</th>
+                                <th>Díjazott</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="suti : ${sutik}">
+                                <td th:text="${suti.id}"></td>
+                                <td th:text="${suti.név}"></td>
+                                <td th:text="${suti.tipus}"></td>
+                                <td th:text="${suti.dijazott}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ÁRAK -->
+                    <header class="major">
+                        <h2>Árak</h2>
+                    </header>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Sütemény</th>
+                                <th>Ár</th>
+                                <th>Egység</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="ar : ${arak}">
+                                <td th:text="${ar.id}"></td>
+                                <td th:text="${ar.suti.név}"></td>
+                                <td th:text="${ar.ertek}"></td>
+                                <td th:text="${ar.egyseg}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- TARTALOM -->
+                    <header class="major">
+                        <h2>Összetevők / Tartalom</h2>
+                    </header>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Sütemény</th>
+                                <th>Mentes</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="tartalom : ${tartalmak}">
+                                <td th:text="${tartalom.id}"></td>
+                                <td th:text="${tartalom.suti.név}"></td>
+                                <td th:text="${tartalom.mentes}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- OLDALSÓ MENÜ -->
+        <div id="sidebar">
+            <div class="inner">
+                <div th:replace="~{menu :: menu}"></div>
+            </div>
+        </div>
+    </div>
+
 <script th:src="@{/js/navbar.js}"></script>
+
 </body>
 </html>

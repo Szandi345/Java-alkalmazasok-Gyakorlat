@@ -75,15 +75,34 @@ public class WebSecurityConfig {
         http
                 .authenticationProvider(authenticationProvider())
 // URL-ek védelme: megmondja, hogy ki melyik oldalt nézheti meg.
+
                 .authorizeHttpRequests(auth -> auth
-// Ezeket mindenki megnézhati: Látogató, User, Admin
-                                .requestMatchers("/", "/register", "/login", "/css/**", "/js/**").permitAll()
-// Ezt csak a User és az Admin nézheti meg:
-                                .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
-// Ezt csak az Admin nézheti meg:
-                                .requestMatchers("/admin").hasRole("ADMIN")
-                                .anyRequest()
-                                .authenticated()
+                        // Nyilvános oldalak - mindenki elérheti
+                        .requestMatchers(
+                                "/",
+                                "/1",
+                                "/adatbazis",
+                                "/kapcsolat",
+                                "/diagram",
+                                "/rest",
+                                "/register",
+                                "/login",
+                                "/css/**",
+                                "/js/**",
+                                "/images/**",
+                                "/webfonts/**"
+                        ).permitAll()
+
+                        // Csak bejelentkezett felhasználók
+                        .requestMatchers("/user", "/uzenetek")
+                        .hasAnyRole("USER", "ADMIN")
+
+                        // Csak adminisztrátorok
+                        .requestMatchers("/admin", "/crud", "/crud/**")
+                        .hasRole("ADMIN")
+
+                        // Minden más útvonalhoz bejelentkezés szükséges
+                        .anyRequest().authenticated()
                 )
 // A form-alapú (űrlapos) bejelentkezést konfigurálja és szabja testre a Spring Security-ben.
 // Engedélyezi és bekapcsolja az űrlapos bejelentkezést:
