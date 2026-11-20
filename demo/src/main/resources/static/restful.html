@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sütik</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="myScript.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Sütik</h1>
+    <button class="new-student-btn" onclick="openCreateModal()">Új süti</button>
+    <table>
+        <thead>
+        <tr>
+            <th>Név</th>
+            <th>Típus</th>
+            <th>Díjazott?</th>
+            <th>Műveletek</th>
+        </tr>
+        </thead>
+        <tbody id="studentTableBody"></tbody>
+    </table>
+    <div id="message"></div>
+</div>
+<!-- Új / módosítás -->
+<div id="studentModal" class="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Új süti</h2>
+        <form id="studentForm">
+            <div class="form-group">
+                <label for="nev">Név</label><input type="text" id="nev" required>
+            </div>
+            <div class="form-group">
+                <label for="tipus">Típus</label><input type="text" id="tipus"required>
+            </div>
+            <div class="form-group">
+                <label for="dijazott">Díjazott?</label><input type="checkbox" id="dijazott">
+            </div>
+            <div class="form-buttons">
+                <button type="submit" class="save-btn">Save</button>
+                <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

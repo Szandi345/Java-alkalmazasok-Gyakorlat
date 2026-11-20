@@ -1,0 +1,164 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+.container {
+    max-width: 100%;
+}
+h1 {
+    margin: 0 0 14px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+/* New student gomb */
+.new-student-btn {
+    background-color: #087ff5;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 7px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+.new-student-btn:hover {
+    background-color: #066dcc;
+}
+/* Táblázat */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+thead {
+    background-color: #343a40;
+    color: white;
+}
+th {
+    text-align: left;
+    padding: 7px;
+    font-weight: bold;
+    border-right: 1px solid #555;
+}
+th:last-child {
+    border-right: none;
+}
+td {
+    padding: 7px;
+    border: 1px solid #e5e5e5;
+    height: 34px;
+}
+tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+/* Műveleti gombok */
+.edit-btn,
+.delete-btn {
+    border: none;
+    color: white;
+    border-radius: 3px;
+    padding: 5px 9px;
+    font-size: 10px;
+    cursor: pointer;
+    margin-right: 3px;
+}
+.edit-btn {
+    background-color: #28a745;
+}
+.edit-btn:hover {
+    background-color: #218838;
+}
+.delete-btn {
+    background-color: #dc3545;
+}
+.delete-btn:hover {
+    background-color: #c82333;
+}
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+    background-color: white;
+    width: 400px;
+    max-width: 90%;
+    margin: 80px auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 18px;
+}
+.form-group {
+    margin-bottom: 12px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.form-buttons {
+    margin-top: 18px;
+    text-align: right;
+}
+.save-btn,
+.cancel-btn {
+    border: none;
+    border-radius: 3px;
+    padding: 7px 12px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.save-btn {
+    background-color: #087ff5;
+    color: white;
+}
+.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+    margin-left: 5px;
+}
+/* Üzenet */
+#message {
+    margin-top: 15px;
+    padding: 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    display: none;
+}
+.success {
+    display: block !important;
+    background-color: #d4edda;
+    color: #155724;
+}
+.error {
+    display: block !important;
+    background-color: #f8d7da;
+    color: #721c24;
+}

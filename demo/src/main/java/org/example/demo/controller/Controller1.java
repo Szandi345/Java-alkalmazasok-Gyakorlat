@@ -15,4 +15,6 @@ public class Controller1 {
     public String adminPage() {
         return "admin";
     }
+    @GetMapping("/restful")
+    public String restfulPage() {return "rest"; }
 }
