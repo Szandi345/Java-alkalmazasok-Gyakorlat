@@ -1,15 +1,97 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity">
+<html lang="hu"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Cukrászda - Főoldal</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
-<body>
-<div th:replace="~{menu :: menu}"></div>
-<hr>
-<h1>Home page</h1>
-<div sec:authorize="isAuthenticated()">
-    <p>Logged in user:<strong sec:authentication="name"></strong></p>
+<body class="is-preload">
+<div id="wrapper">
+
+    <!-- Fő tartalom -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Fejléc -->
+            <header id="header">
+                <a th:href="@{/}" class="logo">
+                    <strong>Édes Álmok</strong> Cukrászda
+                </a>
+            </header>
+
+            <!-- Bemutatkozás -->
+            <section id="banner">
+                <div class="content">
+
+                    <header>
+                        <h1>Üdvözlünk a cukrászdánkban!</h1>
+                        <p>Finom sütemények minden alkalomra</p>
+                    </header>
+                    <p>
+                        Fedezd fel süteményeink széles választékát!
+                        Böngéssz az adatbázisunkban,
+                        ismerd meg a különböző édességeket,
+                        és találd meg a kedvencedet!
+                    </p>
+                    <ul class="actions">
+                        <li>
+                            <a th:href="@{/adatbazis}"
+                               class="button big">
+                                Sütemények megtekintése
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Bejelentkezett felhasználó -->
+            <section sec:authorize="isAuthenticated()">
+                <header class="major">
+                    <h2>Felhasználói fiók</h2>
+                </header>
+                <p>
+                    Bejelentkezve:
+                    <strong sec:authentication="name"></strong>
+                </p>
+            </section>
+
+            <!-- Vendég -->
+            <section sec:authorize="isAnonymous()">
+
+                <header class="major">
+                    <h2>Csatlakozz hozzánk!</h2>
+                </header>
+                <p>
+                    Regisztrálj vagy jelentkezz be,
+                    hogy elérhesd a további funkciókat!
+                </p>
+                <ul class="actions">
+                    <li>
+                        <a th:href="@{/register}" class="button">
+                            Regisztráció
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/login}" class="button primary">
+                            Bejelentkezés
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- Oldalsó menü -->
+    <div id="sidebar">
+        <div class="inner">
+            <div th:replace="~{menu :: menu}"></div>
+        </div>
+    </div>
 </div>
+<script th:src="@{/js/navbar.js}"></script>
 </body>
 </html>

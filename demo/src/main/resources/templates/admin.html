@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
 </head>
 <body>
 <div th:replace="~{menu :: menu}"></div>
@@ -10,5 +11,6 @@
 <h1>Admin page</h1>
 <p>This page can only be seen by ADMIN.</p>
 <p>Admin:<strong sec:authentication="name"></strong></p>
+<script th:src="@{/js/navbar.js}"></script>
 </body>
 </html>

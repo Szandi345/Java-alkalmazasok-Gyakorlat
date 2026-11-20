@@ -1,22 +1,41 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/springsecurity">
+<html lang="hu"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/springsecurity">
+
 <body>
-<nav th:fragment="menu">
-    <!-- Mindenki látja -->
-    <a th:href="@{/}">Home</a>
-    <!-- Csak bejelentkezett USER vagy ADMIN -->
-    <span sec:authorize="isAuthenticated()"> | <a th:href="@{/user}">User</a></span>
-    <!-- Csak ADMIN -->
-    <span sec:authorize="hasRole('ADMIN')"> | <a th:href="@{/admin}">Admin</a></span>
-    <!-- Látogató -->
-    <span sec:authorize="isAnonymous()"> | <a th:href="@{/register}">Register</a>|<a
-            th:href="@{/login}">Login</a></span>
-    <!-- Bejelentkezett felhasználó -->
-    <span sec:authorize="isAuthenticated()"> |
-<form th:action="@{/logout}" method="post" style="display: inline">
-<button type="submit">Logout</button>
-</form>
-</span>
+<nav id="menu" th:fragment="menu">
+    <header class="major">
+        <h2>Menü</h2>
+    </header>
+    <ul>
+        <li><a th:href="@{/}">Főoldal</a></li>
+        <li><a th:href="@{/adatbazis}">Adatbázis</a> </li>
+        <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
+        <li><a th:href="@{/diagram}">Diagram</a> </li>
+        <li><a th:href="@{/rest}">REST API</a></li>
+
+        <!-- Bejelentkezett felhasználók -->
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">Felhasználói oldal</a></li>
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/uzenetek}">Üzenetek</a></li>
+
+        <!-- Adminisztrátor -->
+        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/admin}">Adminisztráció</a></li>
+        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/crud}">CRUD</a></li>
+
+        <!-- Vendég -->
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Bejelentkezés</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/register}">Regisztráció</a></li>
+
+        <!-- Kijelentkezés -->
+        <li sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="button primary">
+                    Kijelentkezés
+                </button>
+            </form>
+        </li>
+    </ul>
 </nav>
 </body>
 </html>
